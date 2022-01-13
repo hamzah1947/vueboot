@@ -2,7 +2,7 @@
   <div>
     <form @submit.prevent="handleSubmit">
       <b-row>
-        <b-col>
+        <b-col cols="6" class="leftop">
           <input
             type="text"
             name="inputbar"
@@ -12,7 +12,16 @@
           />
           <input type="submit" value="Submit" />
         </b-col>
-        <b-col></b-col>
+        <b-col>
+          <input
+            type="text"
+            name="searchbar"
+            v-model="searchtext"
+            id="searchbar"
+            placeholder="Search"
+            @keyup="searchTask"
+          />
+        </b-col>
         <b-col>
           Records limit:
           <select v-model="limit" @change="changeLimit(limit)">
@@ -35,16 +44,25 @@ export default {
     return {
       newtask: "",
       limit: 200,
+      searchtext: "",
     };
   },
   methods: {
-    ...mapActions(["addNewTask", "filterTasks","changeLimit"]),
+    ...mapActions(["addNewTask", "filterTasks", "changeLimit", "searchTasks","getAllTask"]),
     handleSubmit() {
       this.addNewTask(this.newtask);
+    },
+    searchTask() {
+      this.searchtext.length > 2
+        ? this.searchTasks(this.searchtext)
+        : this.getAllTask();
     },
   },
 };
 </script>
 
 <style scoped>
+.leftop {
+  display: flex;
+}
 </style>
