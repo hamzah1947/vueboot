@@ -1,36 +1,29 @@
 <template>
   <div>
     <form @submit.prevent="handleSubmit">
-      <b-row>
-        <b-col cols="6" class="leftop">
-          <input
-            type="text"
-            name="inputbar"
-            v-model="newtask"
-            id="inputbar"
-            placeholder="New task"
-          />
-          <input type="submit" value="Submit" />
-        </b-col>
-        <b-col>
-          <input
-            type="text"
-            name="searchbar"
-            v-model="searchtext"
-            id="searchbar"
-            placeholder="Search"
-            @keyup="searchTask"
-          />
-        </b-col>
-        <b-col>
-          Records limit:
-          <select v-model="limit" @change="changeLimit(limit)">
-            <option value="200">200</option>
-            <option value="100">100</option>
-            <option value="10">10</option>
-          </select>
-        </b-col>
-      </b-row>
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div class="input-group input-group-sm mb-3">
+            <input
+              type="text"
+              name="inputbar"
+              v-model="newtask"
+              id="inputbar"
+              placeholder="New task"
+              class="form-control"
+            />
+            <div class="input-group-append">
+              <input
+                type="submit"
+                value="Submit"
+                class="btn btn-outline-secondary"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3"></div>
+        <div class="col-sm-5 col-md-5 col-lg-5"></div>
+      </div>
     </form>
   </div>
 </template>
@@ -43,19 +36,12 @@ export default {
   data() {
     return {
       newtask: "",
-      limit: 200,
-      searchtext: "",
     };
   },
   methods: {
-    ...mapActions(["addNewTask", "filterTasks", "changeLimit", "searchTasks","getAllTask"]),
+    ...mapActions(["addNewTask", "filterTasks", "getAllTask"]),
     handleSubmit() {
       this.addNewTask(this.newtask);
-    },
-    searchTask() {
-      this.searchtext.length > 2
-        ? this.searchTasks(this.searchtext)
-        : this.getAllTask();
     },
   },
 };

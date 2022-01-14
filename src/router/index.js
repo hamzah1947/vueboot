@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Task from '../views/Task.vue'
 import TaskView from '../views/TaskView.vue'
+import TaskDetailView from '../views/TaskDetailView.vue'
 
 Vue.use(VueRouter)
 
@@ -21,12 +23,23 @@ const routes = [
   },
   {
     path: '/task',
-    name: 'TaskView',
-    component: TaskView
+    component: Task,
+    children: [
+      {
+        path: '/',
+        component: TaskView
+      },
+      {
+        path: '/taskdetail/:id',
+        component: TaskDetailView,
+        props:true
+      }
+    ]
   }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

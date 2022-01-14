@@ -7,7 +7,6 @@
             <h2>Vue Bootstrap test</h2>
             <div id="nav">
               <router-link to="/">Home</router-link> |
-              <router-link to="/about">About</router-link>|
               <router-link to="/task">Tasks</router-link>
             </div>
           </header>
@@ -37,9 +36,12 @@ header{
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 #nav a.router-link-exact-active {
-  color: #bfe614;
+  background-color: #f1f1f1;
 }
 </style>

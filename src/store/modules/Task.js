@@ -6,7 +6,7 @@ export default {
 
         ],
         filteredtasks: [],
-        pagelimit: 200
+        pagelimit: 100
     },
     getters: {
         myTasks: (state) => {
@@ -20,7 +20,7 @@ export default {
         },
 
         async changeLimit({ commit, dispatch }, limit) {
-            commit('changeLimit', { limit });
+            await commit('changeLimit', { limit });
             await dispatch('filterTasks');
         },
         async addNewTask({ commit }, title) {

@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h3>Todays task's</h3>
-    <add-task></add-task>
+    
+    <h3 class="p-3">Todays task's</h3>
     <task-list></task-list>
+    <!-- <add-task></add-task> -->
   </div>
 </template>
 
 <script>
-import AddTask from "../components/AddTask.vue";
 import TaskList from "../components/TaskList.vue";
 export default {
   name: "TaskView",
-  components: { TaskList, AddTask },
+  components: { TaskList },
 };
 </script>
 
