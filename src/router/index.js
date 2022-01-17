@@ -3,8 +3,11 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Task from '../views/Task.vue'
 import TaskView from '../views/TaskView.vue'
+import NewTaskView from '../views/NewTaskView.vue'
 import TaskDetailView from '../views/TaskDetailView.vue'
-
+import PostsView from '../views/Posts.vue'
+import PostsList from '../components/PostList.vue'
+import PostDetails from '../components/PostDetails.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,8 +35,31 @@ const routes = [
       {
         path: '/taskdetail/:id',
         component: TaskDetailView,
-        props:true
+        props: true
       }
+    ]
+  },
+  {
+    path: '/newtask',
+    component: NewTaskView
+  },
+  {
+    path: '/posts/index',
+    component: PostsView,
+    children:[
+      {
+        path: '/',
+        redirect:'/posts/list'
+      },
+      {
+        path: '/posts/list',
+        component: PostsList
+      },
+      {
+        path: '/posts/details/:post_id',
+        component: PostDetails,
+        props:true
+      },
     ]
   }
 ]

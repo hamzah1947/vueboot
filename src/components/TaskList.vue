@@ -11,7 +11,7 @@
               <b-form-input
                 v-model="searchtext"
                 :type="'text'"
-                @keyup="searchTask"
+                @keyup.self.prevent="searchTask"
                 :placeholder="'Filter by title'"
               ></b-form-input>
             </b-input-group>
@@ -21,10 +21,7 @@
           <div class="input-group mb-3 float-right">
             <span>
               Records per page:
-              <select
-                v-model="limit"
-                class="form-control form-control-sm"
-              >
+              <select v-model="limit" class="form-control form-control-sm">
                 <option value="200">200</option>
                 <option value="100">100</option>
                 <option value="10">10</option>
@@ -37,7 +34,7 @@
     <div>
       <b-pagination
         v-model="currentPage"
-        :total-rows="200"
+        :total-rows="myTasks ? myTasks.length : 0"
         :per-page="limit"
         aria-controls="my-table"
       ></b-pagination>
@@ -49,7 +46,9 @@
         :current-page="currentPage"
         @row-clicked="myRowClickHandler"
       ></b-table>
-      <p v-show="!myTasks.length">There are no records to show</p>
+      <p v-show="!(myTasks && myTasks.length > 0)">
+        There are no records to show
+      </p>
     </div>
   </div>
 </template>
@@ -68,13 +67,23 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["myTasks"])
+    ...mapGetters(["myTasks"]),
   },
   methods: {
-    ...mapActions(["getAllTask", "changeLimit", "searchTasks", "filterTasks"]),
+    ...mapActions([
+      "getAllTask",
+      "changeLimit",
+      "searchTasks",
+      "filterTasks",
+      "reassignData",
+    ]),
     searchTask() {
-      if (this.searchtext.length > 2) this.searchTasks(this.searchtext);
-      else if (this.searchtext.length == 0) this.filterTasks();
+      if (this.searchtext && this.searchtext.length > 0)
+        this.searchTasks(this.searchtext);
+      else {
+        // this.filterTasks();
+        this.reassignData();
+      }
     },
     myRowClickHandler(row, index) {
       console.log(row);

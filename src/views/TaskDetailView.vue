@@ -1,9 +1,12 @@
 <template>
   <div>
-    Task Details & User Details
+    <h3 class="p-3">User Details</h3>
     <b-form>
       <b-form-group :label="id"></b-form-group>
     </b-form>
+    <b-table>
+      
+    </b-table>
     {{ currentUser }}
   </div>
 </template>

@@ -4,10 +4,11 @@
       <b-row>
         <b-col>
           <header>
-            <h2>Vue Bootstrap test</h2>
+            <h2>Vue Bootstrap Practive</h2>
             <div id="nav">
               <router-link to="/">Home</router-link> |
-              <router-link to="/task">Tasks</router-link>
+              <router-link to="/task">Tasks</router-link> |
+              <router-link to="/posts/index">Posts</router-link>
             </div>
           </header>
           <router-view />
@@ -17,7 +18,7 @@
   </b-container >
 </template>
 
-<style scoped>
+<style>
 header{
   background-color: #2dabff;
 }
@@ -44,4 +45,6 @@ header{
 #nav a.router-link-exact-active {
   background-color: #f1f1f1;
 }
+
+
 </style>

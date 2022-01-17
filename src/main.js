@@ -7,11 +7,13 @@ import { BootstrapVue, IconsPlugin, BootstrapVueIcons } from 'bootstrap-vue'
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full.esm'
 
-// Make BootstrapVue available throughout your project
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
-// Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false

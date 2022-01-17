@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="row mt-4">
+    <div class="row mt-4 float-right">
       <div class="col">
         <div class="input-group">
-          <button class="btn btn-secondary">Add new task</button>
+          <b-button variant="success" @click="handleNewTask">Add Task</b-button>
         </div>
       </div>
     </div>
@@ -17,8 +17,14 @@
 </template>
 
 <script>
+import router from "@/router";
 export default {
   name: "Task",
+  methods: {
+    handleNewTask() {
+      router.push("/newtask");
+    },
+  },
 };
 </script>
 
