@@ -13,12 +13,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'HomeView',
     component: Home
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'AboutView',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -30,6 +30,10 @@ const routes = [
     children: [
       {
         path: '/',
+        redirect:'/task/list'
+      },
+      {
+        path: '/task/list',
         component: TaskView
       },
       {
@@ -40,7 +44,7 @@ const routes = [
     ]
   },
   {
-    path: '/newtask',
+    path: '/task/new',
     component: NewTaskView
   },
   {

@@ -10,8 +10,8 @@
 <script>
 import TaskList from "../components/TaskList.vue";
 export default {
-  name: "TaskView",
-  components: { TaskList },
+	name: "TaskView",
+	components: { TaskList },
 };
 </script>
 

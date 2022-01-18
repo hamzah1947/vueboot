@@ -16,7 +16,7 @@ import { mapActions, mapGetters } from "vuex";
 import router from "@/router";
 
 export default {
-  name: "postlist",
+  name: "post-list",
   computed: {
     ...mapGetters(["allPosts"]),
   },
@@ -33,10 +33,11 @@ export default {
   mounted() {
     this.fetchAllPosts();
     console.log("Mounted");
+    const randomitem = Math.random();
+    console.log(randomitem);
     console.log(document.getElementById("post-table"));
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

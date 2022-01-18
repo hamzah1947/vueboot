@@ -19,12 +19,12 @@
 <script>
 import router from "@/router";
 export default {
-  name: "Task",
-  methods: {
-    handleNewTask() {
-      router.push("/newtask");
-    },
-  },
+	name: "task-view",
+	methods: {
+		handleNewTask() {
+			router.push("/task/new");
+		},
+	},
 };
 </script>
 

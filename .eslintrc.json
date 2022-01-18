@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "extends": ["plugin:vue/essential", "eslint:recommended"],
+  "rules": {
+    "camelcase": "error",
+    "capitalized-comments": "error",
+    "no-empty-function": "error",
+    "vue/multi-word-component-names": ["error", { "ignores": [] }]
+  }
+}

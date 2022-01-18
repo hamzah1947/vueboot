@@ -8,8 +8,8 @@
 
 <script>
 export default {
-    name:'posts'
-}
+	name:"post-view"
+};
 </script>
 
 <style>

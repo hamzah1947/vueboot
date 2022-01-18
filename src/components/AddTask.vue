@@ -1,33 +1,8 @@
 <template>
   <div>
-    <!-- <form @submit.prevent="handleSubmit">
-      <div class="row">
-        <div class="col-sm-4 col-md-4 col-lg-4">
-          <div class="input-group input-group-sm mb-3">
-            <input
-              type="text"
-              name="inputbar"
-              v-model="newtask"
-              id="inputbar"
-              placeholder="New task"
-              class="form-control"
-            />
-            <div class="input-group-append">
-              <input
-                type="submit"
-                value="Submit"
-                class="btn btn-outline-secondary"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3 col-md-3 col-lg-3"></div>
-        <div class="col-sm-5 col-md-5 col-lg-5"></div>
-      </div>
-    </form> -->
     <ValidationObserver v-slot="{ handleSubmit }">
       <form @submit.prevent="handleSubmit(onSubmit)">
-        <ValidationProvider rules="required|alpha" v-slot="{ failed,invalid }">
+        <ValidationProvider rules="required|alpha" v-slot="{ failed, invalid }">
           <b-form-group
             id="fieldset-1"
             label="Enter Task name"
@@ -44,7 +19,7 @@
               v-bind:class="{ 'text-danger': failed && invalid }"
             ></b-form-input>
             <span v-if="failed && invalid" class="text-danger"
-              >Task name is required</span
+              >Task name is required*</span
             >
           </b-form-group>
         </ValidationProvider>
@@ -71,24 +46,24 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: "add-task",
-  data() {
-    return {
-      newtask: "",
-      isCompleted: false,
-    };
-  },
-  computed: {},
-  methods: {
-    ...mapActions(["addNewTask", "filterTasks", "getAllTask"]),
-    async onSubmit() {
-      await this.addNewTask({
-        title: this.newtask,
-        completed: this.isCompleted,
-      });
-      this.$emit("task-added");
-    },
-  },
+	name: "add-task",
+	data() {
+		return {
+			newtask: "",
+			isCompleted: false,
+		};
+	},
+	computed: {},
+	methods: {
+		...mapActions(["addNewTask", "filterTasks", "getAllTask"]),
+		async onSubmit() {
+			await this.addNewTask({
+				title: this.newtask,
+				completed: this.isCompleted,
+			});
+			this.$emit("task-added");
+		},
+	},
 };
 </script>
 

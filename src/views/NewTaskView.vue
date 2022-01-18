@@ -12,15 +12,15 @@ import AddTask from "../components/AddTask.vue";
 import router from "@/router";
 
 export default {
-  name: "new-task-view",
-  components: {
-    AddTask,
-  },
-  methods: {
-    handleAddition() {
-      router.push("/task");
-    },
-  },
+	name: "new-task-view",
+	components: {
+		AddTask,
+	},
+	methods: {
+		handleAddition() {
+			router.push("/task");
+		},
+	},
 };
 </script>
 

@@ -77,11 +77,12 @@ export default {
       "filterTasks",
       "reassignData",
     ]),
+    custumfunction() {},
     searchTask() {
       if (this.searchtext && this.searchtext.length > 0)
         this.searchTasks(this.searchtext);
       else {
-        // this.filterTasks();
+        // This.filterTasks();
         this.reassignData();
       }
     },
@@ -95,5 +96,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
