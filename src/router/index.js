@@ -56,7 +56,7 @@ const routes = [
         component: PostsList
       },
       {
-        path: '/posts/details/:post_id',
+        path: '/posts/:post_id/comments/list',//can be posts/details/:post_id
         component: PostDetails,
         props:true
       },

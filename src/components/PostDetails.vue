@@ -17,7 +17,6 @@ export default {
     ...mapActions(["fetchComments"]),
   },
   created() {
-    console.log('at created',this.post_id);
     this.fetchComments(this.post_id);
   },
 };

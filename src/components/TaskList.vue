@@ -85,13 +85,11 @@ export default {
         this.reassignData();
       }
     },
-    myRowClickHandler(row, index) {
-      console.log(row);
-      console.log(index);
+    myRowClickHandler(row) {
       router.push(`/taskdetail/${row.id}`);
     },
   },
-  created() {
+  mounted() {
     this.getAllTask();
   },
 };
