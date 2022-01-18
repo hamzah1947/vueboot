@@ -77,7 +77,7 @@ export default {
       "filterTasks",
       "reassignData",
     ]),
-    custumfunction() {},
+    // Custumfunction() {},
     searchTask() {
       if (this.searchtext && this.searchtext.length > 0)
         this.searchTasks(this.searchtext);

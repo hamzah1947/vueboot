@@ -1,1 +1,4 @@
-**/*.js
+**/*.json
+*.config.js
+src/router/index.js
+*.md

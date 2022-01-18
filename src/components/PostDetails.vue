@@ -6,15 +6,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+
+const { mapActions: mapCommentActions, mapGetters: mapCommentGetters } =
+  createNamespacedHelpers("post/comment");
+
 export default {
   name: "post-details",
   props: ["post_id"],
   computed: {
-    ...mapGetters(["allComments"]),
+    ...mapCommentGetters(["allComments"]),
   },
   methods: {
-    ...mapActions(["fetchComments"]),
+    ...mapCommentActions(["fetchComments"]),
   },
   created() {
     this.fetchComments(this.post_id);

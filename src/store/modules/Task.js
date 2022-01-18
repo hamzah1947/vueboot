@@ -22,6 +22,9 @@ export default {
 			commit('changeLimit', { limit });
 			await dispatch('filterTasks');
 		},
+    // Async change(){
+
+    // },
 		async addNewTask({ commit }, payload) {
 			await axios.post('https://jsonplaceholder.typicode.com/todos', { id: Math.random, userId: 2, ...payload }).then(res => {
 				commit('addNewTask', { data: res.data });
@@ -34,7 +37,7 @@ export default {
 		},
 
 		async reassignData({ commit, state }) {
-			const results = state.tasks; // just to refresh
+			const results = state.tasks; // Just to refresh
 			commit('saveAllTasks', { data: results });
 
 		},

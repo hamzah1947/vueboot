@@ -12,20 +12,22 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { createNamespacedHelpers } from "vuex";
 import router from "@/router";
 
+const { mapActions: mapPostActions, mapGetters: mapPostGetters } =
+  createNamespacedHelpers("post");
 export default {
   name: "post-list",
   computed: {
-    ...mapGetters(["allPosts"]),
+    ...mapPostGetters(["allPosts"]),
   },
   created() {
     console.log("Created");
     console.log(document.getElementById("post-table"));
   },
   methods: {
-    ...mapActions(["fetchAllPosts"]),
+    ...mapPostActions(["fetchAllPosts"]),
     myRowClickHandler(row) {
       router.push(`/posts/${row.id}/comments/list`);
     },
@@ -33,8 +35,6 @@ export default {
   mounted() {
     this.fetchAllPosts();
     console.log("Mounted");
-    const randomitem = Math.random();
-    console.log(randomitem);
     console.log(document.getElementById("post-table"));
   },
 };
