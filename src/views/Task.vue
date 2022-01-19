@@ -1,30 +1,35 @@
 <template>
   <div>
-    <div class="row mt-4 float-right">
-      <div class="col">
-        <div class="input-group">
-          <b-button variant="success" @click="handleNewTask">Add Task</b-button>
-        </div>
-      </div>
-    </div>
+    <b-row>
+      <b-col>
+        <b-input-group class="p-3">
+          <b-button variant="success" @click="handleNewTask" class="ml-auto"
+            >Add Task</b-button
+          >
+        </b-input-group>
+      </b-col>
+    </b-row>
     <!-- <div class="sub-route">
       <router-link to="/task">Task List</router-link>
       <router-link to="/taskdetail">Add Task</router-link>
     </div> -->
-
-    <router-view></router-view>
+    <b-row class="p-3 pt-0">
+      <b-col>
+        <router-view></router-view>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 import router from "@/router";
 export default {
-	name: "task-view",
-	methods: {
-		handleNewTask() {
-			router.push("/task/new");
-		},
-	},
+  name: "task-view",
+  methods: {
+    handleNewTask() {
+      router.push("/task/new");
+    },
+  },
 };
 </script>
 

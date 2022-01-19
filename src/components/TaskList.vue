@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3 class="p-3">Todays task's</h3>
     <form @submit.prevent="">
       <div class="row form-inline">
         <div class="col">
@@ -39,7 +40,6 @@
         aria-controls="my-table"
       ></b-pagination>
       <b-table
-        striped
         hover
         :items="myTasks"
         :per-page="limit"
@@ -54,8 +54,11 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
 import router from "@/router";
+
+const { mapActions: mapTaskActions, mapGetters: mapTaskGetters } =
+  createNamespacedHelpers("task");
 
 export default {
   name: "task-list",
@@ -67,10 +70,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["myTasks"]),
+    ...mapTaskGetters(["myTasks"]),
   },
   methods: {
-    ...mapActions([
+    ...mapTaskActions([
       "getAllTask",
       "changeLimit",
       "searchTasks",

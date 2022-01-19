@@ -1,13 +1,41 @@
 <template>
-  <div>
-    <h3>Post List</h3>
-    <b-table
+  <div class="p-5">
+    <h3>Today's Posts</h3>
+    <!-- <b-table
       id="post-table"
       striped
       hover
       :items="allPosts"
       @row-clicked="myRowClickHandler"
-    ></b-table>
+    ></b-table> -->
+
+    <div>
+      <b-card
+        no-body
+        class="overflow-hidden float-left ml-5 mb-5"
+        v-for="post in allPosts"
+        :key="post.id"
+        style="max-width: 500px; max-height: 200px"
+        @click="myRowClickHandler(post.id)"
+      >
+        <b-row no-gutters>
+          <b-col md="6">
+            <b-card-img
+              :src="post.userImageSrc"
+              alt="Image"
+              class="rounded-0"
+            ></b-card-img>
+          </b-col>
+          <b-col md="6">
+            <b-card-body :title="post.title">
+              <b-card-text>
+                {{ post.body }}
+              </b-card-text>
+            </b-card-body>
+          </b-col>
+        </b-row>
+      </b-card>
+    </div>
   </div>
 </template>
 
@@ -22,20 +50,14 @@ export default {
   computed: {
     ...mapPostGetters(["allPosts"]),
   },
-  created() {
-    console.log("Created");
-    console.log(document.getElementById("post-table"));
-  },
   methods: {
     ...mapPostActions(["fetchAllPosts"]),
-    myRowClickHandler(row) {
-      router.push(`/posts/${row.id}/comments/list`);
+    myRowClickHandler(id) {
+      router.push(`/posts/${id}/comments/list`);
     },
   },
   mounted() {
     this.fetchAllPosts();
-    console.log("Mounted");
-    console.log(document.getElementById("post-table"));
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-5">
     <h3>All comments on selected post</h3>
     <b-table striped hover :items="allComments"></b-table>
   </div>

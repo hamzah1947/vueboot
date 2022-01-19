@@ -1,76 +1,106 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Task from '../views/Task.vue'
-import TaskView from '../views/TaskView.vue'
-import NewTaskView from '../views/NewTaskView.vue'
-import TaskDetailView from '../views/TaskDetailView.vue'
-import PostsView from '../views/Posts.vue'
-import PostsList from '../components/PostList.vue'
-import PostDetails from '../components/PostDetails.vue'
-Vue.use(VueRouter)
+import Vue from "vue";
+import store from "../store";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import Task from "../views/Task.vue";
+import Login from "../views/Login.vue";
+import TaskList from "../components/TaskList.vue";
+import TaskDetails from "../components/TaskDetails.vue";
+import PostsView from "../views/Posts.vue";
+import PostsList from "../components/PostList.vue";
+import AddTask from "../components/AddTask.vue";
+import PostDetails from "../components/PostDetails.vue";
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'HomeView',
-    component: Home
+    path: "/",
+    name: "HomeView",
+    component: Home,
   },
   {
-    path: '/about',
-    name: 'AboutView',
+    path: "/about",
+    name: "AboutView",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import('../views/About.vue')
+    component: () => import("../views/About.vue"),
   },
   {
-    path: '/task',
+    path: "/login",
+    name: "LoginView",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import("../views/Login.vue"),
+  },
+  {
+    path: "/task",
     component: Task,
     children: [
       {
-        path: '/',
-        redirect:'/task/list'
+        path: "/",
+        redirect: "/task/list",
+        meta: { requiresAuth: true },
       },
       {
-        path: '/task/list',
-        component: TaskView
-      },
+        path: "/task/list",
+        component: TaskList,
+        meta: { requiresAuth: true },
+      }, //meta
       {
-        path: '/taskdetail/:id',
-        component: TaskDetailView,
-        props: true
-      }
-    ]
+        path: "/taskdetail/:id",
+        component: TaskDetails,
+        props: true,
+        meta: { requiresAuth: true },
+      },
+    ],
   },
   {
-    path: '/task/new',
-    component: NewTaskView
+    path: "/task/new",
+    component: AddTask,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
-    path: '/posts/index',
+    path: "/posts/index",
     component: PostsView,
-    children:[
+    children: [
       {
-        path: '/',
-        redirect:'/posts/list'
+        path: "/",
+        redirect: "/posts/list",
+        meta: { requiresAuth: true },
       },
       {
-        path: '/posts/list',
-        component: PostsList
+        path: "/posts/list",
+        component: PostsList,
+        meta: { requiresAuth: true },
       },
       {
-        path: '/posts/:post_id/comments/list',//can be posts/details/:post_id
+        path: "/posts/:post_id/comments/list", //can be posts/details/:post_id
         component: PostDetails,
-        props:true
+        meta: { requiresAuth: true },
+        props: true,
       },
-    ]
-  }
-]
+    ],
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
-  routes
-})
+  mode: "history",
+  routes,
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (store.getters["authenticate/isLoggedIn"]) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
+export default router;

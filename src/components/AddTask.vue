@@ -1,7 +1,8 @@
 <template>
   <div>
+    <h3 class="p-3">Add new Task</h3>
     <ValidationObserver v-slot="{ handleSubmit }">
-      <form @submit.prevent="handleSubmit(onSubmit)">
+      <form @submit.prevent="handleSubmit(onSubmit)" class="p-3">
         <ValidationProvider rules="required|alpha" v-slot="{ failed, invalid }">
           <b-form-group
             id="fieldset-1"
@@ -18,7 +19,7 @@
               trim
               v-bind:class="{ 'text-danger': failed && invalid }"
             ></b-form-input>
-            <span v-if="failed && invalid" class="text-danger"
+            <span v-if="failed && invalid" class="text-danger float-left"
               >Task name is required*</span
             >
           </b-form-group>
@@ -44,31 +45,39 @@
 
 <script>
 import { mapActions } from "vuex";
+import router from "@/router";
 
 export default {
-	name: "add-task",
-	data() {
-		return {
-			newtask: "",
-			isCompleted: false,
-		};
-	},
-	computed: {},
-	methods: {
-		...mapActions(["addNewTask", "filterTasks", "getAllTask"]),
-		async onSubmit() {
-			await this.addNewTask({
-				title: this.newtask,
-				completed: this.isCompleted,
-			});
-			this.$emit("task-added");
-		},
-	},
+  name: "AddTask",
+  data() {
+    return {
+      newtask: "",
+      isCompleted: false,
+    };
+  },
+  computed: {},
+  methods: {
+    ...mapActions(["addNewTask", "filterTasks", "getAllTask"]),
+    async onSubmit() {
+      await this.addNewTask({
+        title: this.newtask,
+        completed: this.isCompleted,
+      });
+      router.push("/task");
+    },
+  },
 };
 </script>
 
 <style scoped>
 .leftop {
   display: flex;
+}
+
+form{
+  width: 70%;
+  margin: auto;
+  border: 1pt solid darkcyan;
+  border-radius: 10px;
 }
 </style>

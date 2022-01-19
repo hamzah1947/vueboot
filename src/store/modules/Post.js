@@ -15,9 +15,17 @@ export default {
         "https://jsonplaceholder.typicode.com/posts"
       );
       commit("saveAllPosts", { data: results.data });
+      commit("assignUserImage");
     },
   },
   mutations: {
+    assignUserImage(state) {
+      state.posts = state.posts.map((post) => {
+        post.userImageSrc =
+          `https://source.unsplash.com/random/400x400/?sig=${Math.floor(Math.random() * 1000)}?face,office,smile,profile`;
+        return post;
+      });
+    },
     saveAllPosts(state, payload) {
       state.posts = payload.data;
     },
@@ -25,7 +33,7 @@ export default {
 
   modules: {
     comment: {
-      namespaced:true,
+      namespaced: true,
       state: {
         comments: [],
       },
