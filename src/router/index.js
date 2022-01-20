@@ -93,14 +93,20 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (store.getters["authenticate/isLoggedIn"]) {
-      next();
-      return;
+  if (window.localStorage.getItem("token")) {
+    if (!store.getters["authenticate/isLoggedIn"]) {
+      store.dispatch("authenticate/attemptLogin");
     }
-    next("/login");
-  } else {
     next();
+  } else {
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+      console.log("going to login");
+      next("/login");
+    } else {
+      next();
+    }
   }
+  // ignoring default next() in final line because it would be executed twice. Bad behavior.
+  //referred to docs and implementation.
 });
 export default router;

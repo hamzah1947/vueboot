@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default {
   namespaced: true,
   state: {
@@ -8,13 +10,16 @@ export default {
   },
   actions: {
     async attemptLogin({ commit }) {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, 1000);
-      }).then(() => {
-        commit("login");
-      });
+      const token = window.localStorage.getItem("token");
+      if (token) {
+        commit("login", token);
+      } else {
+        const res = await axios.post("https://reqres.in/api/login", {
+          email: "eve.holt@reqres.in",
+          password: "cityslicka",
+        });
+        commit("login", res.data.token);
+      }
     },
     async attemptLogout({ commit }) {
       await new Promise((resolve) => {
@@ -27,13 +32,13 @@ export default {
     },
   },
   mutations: {
-    login(state) {
+    login(state, token) {
       state.loggedIn = true;
-      console.log("login with ", state.loggedIn);
+      window.localStorage.setItem("token", token);
     },
     logout(state) {
       state.loggedIn = false;
-      console.log("logout with ", state.loggedIn);
+      window.localStorage.removeItem("token");
     },
   },
 };
